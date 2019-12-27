@@ -14,6 +14,7 @@ export default function Name({
     onLastNameChange(event.target.value);
   }
 
+
   return (
     <div>
       <div className="flex-row">
@@ -22,6 +23,7 @@ export default function Name({
           <input
             type="text"
             id="firstName"
+            name="firstName"
             placeholder="First Name"
             onChange={handleFirstChange}
             value={firstName}

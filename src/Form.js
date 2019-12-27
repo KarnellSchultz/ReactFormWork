@@ -7,17 +7,19 @@ import Phone from "./Phone";
 export default function Form() {
   const formInitialState = {
     email: "",
+    marketingCheckBox: false,
     firstName: "",
     lastName: "",
     address1: "",
     address2: "",
-    country: "",
+    country: "Sweden",
     postalCode: "",
     phoneNumber: ""
   };
   const [formData, setFromData] = useState(formInitialState);
   const {
     email,
+    marketingCheckBox,
     firstName,
     lastName,
     address1,
@@ -28,18 +30,33 @@ export default function Form() {
   } = formData;
 
   function onFirstNameChange(event) {
-    setFromData({ firstName: event });
+    setFromData({ ...formData, firstName: event });
   }
   function onLastNameChange(event) {
-    setFromData({ lastName: event });
+    setFromData({ ...formData, lastName: event });
   }
   function onEmailChange(event) {
-    setFromData({ email: event });
+    setFromData({ ...formData, email: event });
+  }
+  function onMarketingCheckBoxChange(event) {
+    marketingCheckBox === true ? (event = false) : (event = true);
+    setFromData({ ...formData, marketingCheckBox: event });
   }
   function onPhoneNumberChange(event) {
-    setFromData({ phoneNumber: event });
+    setFromData({ ...formData, phoneNumber: event });
   }
-  
+  function onAddress1Change(event) {
+    setFromData({ ...formData, address1: event });
+  }
+  function onAddress2Change(event) {
+    setFromData({ ...formData, address2: event });
+  }
+  function onCountryChange(event) {
+    setFromData({ ...formData, country: event });
+  }
+  function onPostalCodeChange(event) {
+    setFromData({ ...formData, postalCode: event });
+  }
 
   function handleSubmit(event) {
     // console.log(event.target)
@@ -49,21 +66,35 @@ export default function Form() {
 
   return (
     <div className="small-container">
-      <h1 className="vertical-center">React Form Stuff</h1>
-      <form onSubmit={handleSubmit}>
-        <Email email={email} onEmailChange={onEmailChange} />
+      <h1 className="vertical-center">Contact Information</h1>
+      <form name="contactInformation" onSubmit={handleSubmit}>
+        <Email
+          email={email}
+          onEmailChange={onEmailChange}
+          onMarketingCheckBoxChange={onMarketingCheckBoxChange}
+          marketingCheckBox={marketingCheckBox}
+        />
         <Name
           firstName={firstName}
           lastName={lastName}
           onFirstNameChange={onFirstNameChange}
           onLastNameChange={onLastNameChange}
         />
-        <Address />
+        <Address
+          address1={address1}
+          address2={address2}
+          postalCode={postalCode}
+          country={country}
+          onAddress1Change={onAddress1Change}
+          onAddress2Change={onAddress2Change}
+          onPostalCodeChange={onPostalCodeChange}
+          onCountryChange={onCountryChange}
+        />
         <Phone
           phoneNumber={phoneNumber}
           onPhoneNumberChange={onPhoneNumberChange}
         />
-        <button type="submit" className="vertical-center">
+        <button type="submit">
           Submit
         </button>
       </form>
