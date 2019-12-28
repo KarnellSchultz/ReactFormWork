@@ -4,7 +4,8 @@ export default function Email({
   email,
   onEmailChange,
   marketingCheckBox,
-  onMarketingCheckBoxChange
+  onMarketingCheckBoxChange,
+  hasEmailData
 }) {
   function handleEmailChange(event) {
     onEmailChange(event.target.value);
@@ -15,14 +16,21 @@ export default function Email({
 
   return (
     <>
-      <label htmlFor="emailAddress">Email</label>
+      {hasEmailData ? (
+        <label className="transition-label" htmlFor="emailAddress">E-mail</label>
+      ) : (
+        <label className="invisible" htmlFor="emailAddress">
+           E-mail
+        </label>
+      )}
+
       <input
         type="email"
         className="form-control"
         name=""
         id="emailAddress"
         aria-describedby="emailHelpId"
-        placeholder="Nellzus@mailing.com"
+        placeholder="E-mail"
         onChange={handleEmailChange}
         value={email}
       ></input>
@@ -33,7 +41,7 @@ export default function Email({
             onChange={handleMarketingCheckBox}
             type="checkbox"
           ></input>
-         &nbsp; Keep me up to date with marketing stuff
+          &nbsp; Keep me up to date with marketing stuff
         </label>
       </small>
     </>
