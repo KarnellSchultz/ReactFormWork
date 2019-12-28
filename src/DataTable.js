@@ -29,7 +29,9 @@ export default function DataTable({ formData }) {
           </tr>
           <tr>
             <td>Address 2:</td>
-            <td>{formData.address2 !== "" ? formData.address2 : "no apt data"}</td>
+            <td>
+              {formData.address2 !== "" ? formData.address2 : "no apt data"}
+            </td>
             <td>{formData.country}</td>
           </tr>
         </tbody>

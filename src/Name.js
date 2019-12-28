@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export default function Name({
   firstName,
   onFirstNameChange,
@@ -13,7 +12,6 @@ export default function Name({
   function handleLastChange(event) {
     onLastNameChange(event.target.value);
   }
-
 
   return (
     <div>

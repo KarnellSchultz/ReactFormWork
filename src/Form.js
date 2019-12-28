@@ -3,7 +3,7 @@ import Name from "./Name";
 import Email from "./Email";
 import Address from "./Address";
 import Phone from "./Phone";
-import DataTable from './DataTable'
+import DataTable from "./DataTable";
 
 export default function Form() {
   const formDataInitialState = {
@@ -37,7 +37,7 @@ export default function Form() {
   };
   const formInitialState = stateOptionsForForm[1];
   const [formState, setFormState] = useState(formInitialState);
-  
+
   const initEmailData = false;
   const [hasEmailData, setHasEmailData] = useState(initEmailData);
 
@@ -71,9 +71,9 @@ export default function Form() {
   }
 
   function handleSubmit(event) {
-      event.preventDefault();
-      console.log('form submitted', stateOptionsForForm[3])
-    setFormState(stateOptionsForForm[3])
+    event.preventDefault();
+    console.log("form submitted", stateOptionsForForm[3]);
+    setFormState(stateOptionsForForm[3]);
   }
 
   useEffect(() => {
@@ -126,10 +126,7 @@ export default function Form() {
           </>
         ) : null}
       </form>
-      {formState === 'formSubmitted' ? 
-      <DataTable formData={formData} />
-      : null      
-    }
+      {formState === "formSubmitted" ? <DataTable formData={formData} /> : null}
     </div>
   );
 }

@@ -17,10 +17,12 @@ export default function Email({
   return (
     <>
       {hasEmailData ? (
-        <label className="transition-label" htmlFor="emailAddress">E-mail</label>
+        <label className="transition-label" htmlFor="emailAddress">
+          E-mail
+        </label>
       ) : (
         <label className="invisible" htmlFor="emailAddress">
-           E-mail
+          E-mail
         </label>
       )}
 
