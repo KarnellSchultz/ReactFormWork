@@ -26,15 +26,32 @@ export default function Address({
   return (
     <>
       <h3>Shipping Address</h3>
-      <label htmlFor="address1">Address</label>
+      <label
+        className={
+          address1.length > 1
+            ? "transition-label  transition-label-active"
+            : "transition-label"
+        }
+        htmlFor="address1"
+      >
+        Address
+      </label>
       <input
+      required
         type="text"
         id="address1"
         placeholder="Mailing Addy"
         value={address1}
         onChange={handleAddress1Change}
       ></input>
-      <label htmlFor="address2"></label>
+      <label
+        className={
+          address2.length > 1
+            ? "transition-label  transition-label-active"
+            : "transition-label"
+        }
+        htmlFor="address2"
+      ></label>
       <input
         type="text"
         id="address2"
@@ -45,7 +62,16 @@ export default function Address({
 
       <div className="flex-row">
         <div className="flex-small">
-          <label htmlFor="country">Country</label>
+          <label
+            className={
+              country.length > 1
+                ? "transition-label  transition-label-active"
+                : "transition-label"
+            }
+            htmlFor="country"
+          >
+            Country
+          </label>
           <select onChange={handleCountryChange} value={country} id="country">
             <option disabled defaultValue>
               Please select
@@ -57,7 +83,16 @@ export default function Address({
           </select>
         </div>
         <div className="flex-small">
-          <label htmlFor="postalCode">Postal Code</label>
+          <label
+            className={
+              postalCode.length > 1
+                ? "transition-label  transition-label-active"
+                : "transition-label"
+            }
+            htmlFor="postalCode"
+          >
+            Postal Code
+          </label>
           <input
             type="text"
             id="postalCode"

@@ -1,6 +1,7 @@
 import React from "react";
+import ClearFormButton from "./ClearFormButton";
 
-export default function DataTable({ formData }) {
+export default function DataTable({ formData, clearFormHandle }) {
   return (
     <div>
       <table className="striped-table">
@@ -36,6 +37,7 @@ export default function DataTable({ formData }) {
           </tr>
         </tbody>
       </table>
+      <ClearFormButton clearFormHandle={clearFormHandle} />
     </div>
   );
 }

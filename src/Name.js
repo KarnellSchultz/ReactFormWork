@@ -17,7 +17,17 @@ export default function Name({
     <div>
       <div className="flex-row">
         <div className="flex-small">
-          <label htmlFor="firstName">First Name</label>
+          <label
+            className={
+              firstName.length > 1
+                ? "transition-label transition-label-active "
+                : "transition-label"
+            }
+            htmlFor="firstName"
+          >
+            First Name
+          </label>
+
           <input
             type="text"
             id="firstName"
@@ -28,7 +38,16 @@ export default function Name({
           />
         </div>
         <div className="flex-small">
-          <label htmlFor="name">Last Name</label>
+          <label
+            className={
+              lastName.length > 1
+                ? "transition-label transition-label-active"
+                : "transition-label"
+            }
+            htmlFor="name"
+          >
+            Last Name
+          </label>
           <input
             type="text"
             id="lastName"

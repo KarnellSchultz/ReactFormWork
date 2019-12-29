@@ -6,11 +6,20 @@ export default function Phone({ phoneNumber, onPhoneNumberChange }) {
   }
   return (
     <>
-      <label htmlFor="phone">Phone Number</label>
+      <label
+        className={
+          phoneNumber.length > 1
+            ? "transition-label  transition-label-active"
+            : "transition-label"
+        }
+        htmlFor="phone"
+      >
+        Phone Number
+      </label>
       <input
         type="tel"
         id="phone"
-        placeholder="076-123-3210"
+        placeholder="Phone Number"
         onChange={handleChange}
         value={phoneNumber}
       ></input>

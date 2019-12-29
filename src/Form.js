@@ -13,7 +13,7 @@ export default function Form() {
     lastName: "",
     address1: "",
     address2: "",
-    country: "Sweden",
+    country: "",
     postalCode: "",
     phoneNumber: ""
   };
@@ -37,9 +37,6 @@ export default function Form() {
   };
   const formInitialState = stateOptionsForForm[1];
   const [formState, setFormState] = useState(formInitialState);
-
-  const initEmailData = false;
-  const [hasEmailData, setHasEmailData] = useState(initEmailData);
 
   function onFirstNameChange(event) {
     setFromData({ ...formData, firstName: event });
@@ -70,22 +67,30 @@ export default function Form() {
     setFromData({ ...formData, postalCode: event });
   }
 
+  const clearFormHandle = (event) => {
+    event.preventDefault()
+    setFromData(formDataInitialState)
+    setFormState(formInitialState)
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
+    if (formState !== stateOptionsForForm[1] ) {
     console.log("form submitted", stateOptionsForForm[3]);
     setFormState(stateOptionsForForm[3]);
+    }
   }
 
   useEffect(() => {
     console.log("we are using effect");
-    if (formData.email.length >= 2) {
-      setHasEmailData(true);
-    } else {
-      setHasEmailData(false);
+    if (
+      email &&
+      firstName &&
+      lastName &&
+      formState !== stateOptionsForForm[3]
+    ) {
+      setFormState(stateOptionsForForm[2]);
     }
-    // if ( hasEmailData && formData.firstName && formData.lastName !== "" ) {
-    //     setFormState(stateOptionsForForm[2])
-    // }
   }, [formData, formState]);
 
   return (
@@ -97,7 +102,6 @@ export default function Form() {
           onEmailChange={onEmailChange}
           onMarketingCheckBoxChange={onMarketingCheckBoxChange}
           marketingCheckBox={marketingCheckBox}
-          hasEmailData={hasEmailData}
         />
         <Name
           firstName={firstName}
@@ -106,8 +110,14 @@ export default function Form() {
           onLastNameChange={onLastNameChange}
         />
 
-        {formState > stateOptionsForForm[1] ? (
-          <>
+        <>
+          <div
+            className={
+              formState !== stateOptionsForForm[1]
+                ? "form-fade form-fade-active"
+                : "hidden form-fade"
+            }
+          >
             <Address
               address1={address1}
               address2={address2}
@@ -123,10 +133,10 @@ export default function Form() {
               onPhoneNumberChange={onPhoneNumberChange}
             />
             <button type="submit">Submit</button>
-          </>
-        ) : null}
+          </div>
+        </>
       </form>
-      {formState === "formSubmitted" ? <DataTable formData={formData} /> : null}
+      {formState === "formSubmitted" ? <DataTable formData={formData} clearFormHandle={clearFormHandle} /> : null}
     </div>
   );
 }

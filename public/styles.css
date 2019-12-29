@@ -744,15 +744,28 @@ dd {
 }
 
 .transition-label {
-  transition: opacity 2s ease,
-  transform 2s ease  
-;
-  opacity: .7;
-  padding-left: 15px;
-  transform: translateY(25%);
+  transition: all .5s ease;
+  opacity: .00;
+  font-size: .9rem;
+  padding-left: 2px;
+  transform: translateY(40%);
 }
-.transition-label:hover {
-  background-color: cornsilk;
+.transition-label-active {
+  padding-left: 12px;
+  transition-delay: all 2.2s;
+  opacity: .8;
+}
+
+.form-fade {
+  transform: translateY(150%);
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.form-fade-active {
+  transform: translateX(0%);
+  opacity: 1;
+  transition: all 1.5s ease;
 }
 
 /**
