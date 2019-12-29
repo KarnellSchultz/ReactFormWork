@@ -25,7 +25,7 @@ export default function Address({
 
   return (
     <>
-      <h3>Shipping Address</h3>
+      <h3> 📦Shipping Address</h3>
       <label
         className={
           address1.length > 1
@@ -34,7 +34,7 @@ export default function Address({
         }
         htmlFor="address1"
       >
-        Address
+         🏠Address
       </label>
       <input
       required
@@ -70,7 +70,7 @@ export default function Address({
             }
             htmlFor="country"
           >
-            Country
+              🗺Country
           </label>
           <select onChange={handleCountryChange} value={country} id="country">
             <option disabled defaultValue>
@@ -91,7 +91,7 @@ export default function Address({
             }
             htmlFor="postalCode"
           >
-            Postal Code
+             📬Postal Code
           </label>
           <input
             type="text"

@@ -14,7 +14,7 @@ export default function Phone({ phoneNumber, onPhoneNumberChange }) {
         }
         htmlFor="phone"
       >
-        Phone Number
+        ☎️Phone Number
       </label>
       <input
         type="tel"

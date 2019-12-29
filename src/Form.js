@@ -13,7 +13,7 @@ export default function Form() {
     lastName: "",
     address1: "",
     address2: "",
-    country: "",
+    country: "Sweden",
     postalCode: "",
     phoneNumber: ""
   };
@@ -95,7 +95,7 @@ export default function Form() {
 
   return (
     <div className="small-container">
-      <h1 className="vertical-center">Contact Information</h1>
+      <h1 className="vertical-center"> 📇 Karnell's Contact Form</h1>
       <form name="contactInformation" onSubmit={handleSubmit}>
         <Email
           email={email}

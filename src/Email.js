@@ -39,7 +39,7 @@ export default function Email({
         }
         htmlFor="emailAddress"
       >
-        E-mail
+         📧E-mail
       </label>
       <input
         type="email"

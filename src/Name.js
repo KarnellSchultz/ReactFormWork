@@ -25,7 +25,7 @@ export default function Name({
             }
             htmlFor="firstName"
           >
-            First Name
+            😄 First Name
           </label>
 
           <input
