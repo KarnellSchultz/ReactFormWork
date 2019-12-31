@@ -1,9 +1,17 @@
 import React from "react";
 import ClearFormButton from "./ClearFormButton";
+import { useSpring, animated } from "react-spring";
 
 export default function DataTable({ formData, clearFormHandle }) {
+  const tableFade = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    from: { transform: "translateY(20%)" },
+    to: { transform: "translateY(0%)" }
+  });
+
   return (
-    <div>
+    <animated.div style={tableFade}>
       <table className="striped-table">
         <thead>
           <tr>
@@ -38,6 +46,6 @@ export default function DataTable({ formData, clearFormHandle }) {
         </tbody>
       </table>
       <ClearFormButton clearFormHandle={clearFormHandle} />
-    </div>
+    </animated.div>
   );
 }
