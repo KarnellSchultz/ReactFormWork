@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSpring, animated } from "react-spring";
+
 import Name from "./Name";
 import Email from "./Email";
 import Address from "./Address";
@@ -67,17 +69,17 @@ export default function Form() {
     setFromData({ ...formData, postalCode: event });
   }
 
-  const clearFormHandle = (event) => {
-    event.preventDefault()
-    setFromData(formDataInitialState)
-    setFormState(formInitialState)
-  }
+  const clearFormHandle = event => {
+    event.preventDefault();
+    setFromData(formDataInitialState);
+    setFormState(formInitialState);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (formState !== stateOptionsForForm[1] ) {
-    console.log("form submitted", stateOptionsForForm[3]);
-    setFormState(stateOptionsForForm[3]);
+    if (formState !== stateOptionsForForm[1]) {
+      console.log("form submitted", stateOptionsForForm[3]);
+      setFormState(stateOptionsForForm[3]);
     }
   }
 
@@ -91,7 +93,22 @@ export default function Form() {
     ) {
       setFormState(stateOptionsForForm[2]);
     }
+    if (
+      formState === stateOptionsForForm[2] ||
+      formState === stateOptionsForForm[3]
+    ) {
+      setIsToggle(true);
+    } else {
+      setIsToggle(false);
+    }
   }, [formData, formState]);
+
+  const [isToggled, setIsToggle] = useState(false);
+  const fade = useSpring({
+    opacity: isToggled ? 1 : 0,
+    transform: isToggled ? "translateY(0%)" : "translateY(20%)"
+  });
+
 
   return (
     <div className="small-container">
@@ -111,32 +128,31 @@ export default function Form() {
         />
 
         <>
-          <div
-            className={
-              formState !== stateOptionsForForm[1]
-                ? "form-fade form-fade-active"
-                : "hidden form-fade"
-            }
-          >
-            <Address
-              address1={address1}
-              address2={address2}
-              postalCode={postalCode}
-              country={country}
-              onAddress1Change={onAddress1Change}
-              onAddress2Change={onAddress2Change}
-              onPostalCodeChange={onPostalCodeChange}
-              onCountryChange={onCountryChange}
-            />
-            <Phone
-              phoneNumber={phoneNumber}
-              onPhoneNumberChange={onPhoneNumberChange}
-            />
-            <button type="submit">Submit</button>
-          </div>
+          {formState === stateOptionsForForm[2] ||
+          formState === stateOptionsForForm[3] ? (
+            <animated.div style={fade}>
+              <Address
+                address1={address1}
+                address2={address2}
+                postalCode={postalCode}
+                country={country}
+                onAddress1Change={onAddress1Change}
+                onAddress2Change={onAddress2Change}
+                onPostalCodeChange={onPostalCodeChange}
+                onCountryChange={onCountryChange}
+              />
+              <Phone
+                phoneNumber={phoneNumber}
+                onPhoneNumberChange={onPhoneNumberChange}
+              />
+              <button type="submit">Submit</button>
+            </animated.div>
+          ) : null}
         </>
       </form>
-      {formState === "formSubmitted" ? <DataTable formData={formData} clearFormHandle={clearFormHandle} /> : null}
+      {formState === stateOptionsForForm[3] ? (
+        <DataTable formData={formData} clearFormHandle={clearFormHandle} />
+      ) : null}
     </div>
   );
 }
