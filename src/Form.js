@@ -7,7 +7,8 @@ import Address from './Address';
 import Phone from './Phone';
 import DataTable from './DataTable';
 import Toggle from './Toggle';
-import Modal from './Modal';
+// import Modal from './Modal';
+import Heading from './Heading';
 
 export default function Form() {
 	const formDataInitialState = {
@@ -72,7 +73,8 @@ export default function Form() {
 	}
 
 	const clearFormHandle = event => {
-		event.preventDefault();
+    event.preventDefault();
+    setIsToggle(false)
 		setFromData(formDataInitialState);
 		setFormState(formInitialState);
 	};
@@ -82,7 +84,7 @@ export default function Form() {
 		if (formState !== stateOptionsForForm[1]) {
 			console.log('form submitted', stateOptionsForForm[3]);
 			console.log(formData);
-      setFormState(stateOptionsForForm[3]);
+			setFormState(stateOptionsForForm[3]);
 		}
 	}
 
@@ -113,7 +115,7 @@ export default function Form() {
 
 	return (
 		<div className="small-container">
-			<h1 className="vertical-center"> 📇 Karnell's Contact Form</h1>
+			<Heading />
 			<form name="contactInformation" onSubmit={handleSubmit}>
 				<Email
 					email={email}
@@ -158,15 +160,19 @@ export default function Form() {
 								phoneNumber={phoneNumber}
 								onPhoneNumberChange={onPhoneNumberChange}
 							/>
-							<button type="submit">Submit Form</button>
+							{formState === stateOptionsForForm[3] ? (
+								<button disabled className="muted-button" type="submit">
+									Form Submitted
+								</button>
+							) : (
+								<button type="submit">Submit Form</button>
+							)}
 						</animated.div>
 					) : null}
 				</>
 			</form>
 			{formState === stateOptionsForForm[3] && (
-					<DataTable
-          formData={formData}
-          clearFormHandle={clearFormHandle}/>
+				<DataTable formData={formData} clearFormHandle={clearFormHandle} />
 			)}
 		</div>
 	);

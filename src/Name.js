@@ -1,4 +1,5 @@
 import React from "react";
+import {useSpring, animated} from 'react-spring';
 
 export default function Name({
   firstName,
@@ -13,10 +14,23 @@ export default function Name({
     onLastNameChange(event.target.value);
   }
 
+  const FirstNameFade = useSpring({
+		from: { opacity: 0 },
+		to: { opacity: 1 },
+		from: { transform: 'translateX(-100%)' },
+		to: { transform: 'translateX(0%)' }
+	});
+  const LastNameFade = useSpring({
+		from: { opacity: 0 },
+		to: { opacity: 1 },
+		from: { transform: 'translateX(100%)' },
+		to: { transform: 'translateX(0%)' }
+	});
+
   return (
     <div>
       <div className="flex-row">
-        <div className="flex-small">
+        <animated.div  style={FirstNameFade} className="flex-small">
           <label
             className={
               firstName.length > 1
@@ -36,8 +50,8 @@ export default function Name({
             onChange={handleFirstChange}
             value={firstName}
           />
-        </div>
-        <div className="flex-small">
+        </animated.div>
+        <animated.div style={LastNameFade} className="flex-small">
           <label
             className={
               lastName.length > 1
@@ -55,7 +69,7 @@ export default function Name({
             onChange={handleLastChange}
             value={lastName}
           />
-        </div>
+        </animated.div>
       </div>
     </div>
   );
