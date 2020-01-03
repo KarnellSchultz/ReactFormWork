@@ -73,7 +73,7 @@ export default function Address({
               🗺Country
           </label>
           <select onChange={handleCountryChange} value={country} id="country">
-            <option disabled selected>
+            <option disabled defaultValue>
               Please select
             </option>
             <option value="Sweden">Sweden</option>
