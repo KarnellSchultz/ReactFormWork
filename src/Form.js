@@ -6,7 +6,7 @@ import Email from './Email';
 import Address from './Address';
 import Phone from './Phone';
 import DataTable from './DataTable';
-import Toggle from './Toggle';
+// import Toggle from './Toggle';
 // import Modal from './Modal';
 import Heading from './Heading';
 
@@ -43,44 +43,25 @@ export default function Form() {
 	const formInitialState = stateOptionsForForm[1];
 	const [formState, setFormState] = useState(formInitialState);
 
-	function onFirstNameChange(event) {
-		setFromData({ ...formData, firstName: event });
-	}
-	function onLastNameChange(event) {
-		setFromData({ ...formData, lastName: event });
-	}
-	function onEmailChange(event) {
-		setFromData({ ...formData, email: event });
-	}
-	function onMarketingCheckBoxChange(event) {
-		marketingCheckBox === true ? (event = false) : (event = true);
-		setFromData({ ...formData, marketingCheckBox: event });
-	}
-	function onPhoneNumberChange(event) {
-		setFromData({ ...formData, phoneNumber: event });
-	}
-	function onAddress1Change(event) {
-		setFromData({ ...formData, address1: event });
-	}
-	function onAddress2Change(event) {
-		setFromData({ ...formData, address2: event });
-	}
-	function onCountryChange(event) {
-		setFromData({ ...formData, country: event });
-	}
-	function onPostalCodeChange(event) {
-		setFromData({ ...formData, postalCode: event });
+	const [submittedFromData, setSubmittedFromData] = useState({});
+
+	function setFormOnChangeValue(value, setValue) {
+		setFromData({ ...formData, [value]: setValue });
 	}
 
 	const clearFormHandle = event => {
-    event.preventDefault();
-    setIsToggle(false)
+		event.preventDefault();
+		setIsToggle(false);
 		setFromData(formDataInitialState);
 		setFormState(formInitialState);
+		setSubmittedFromData({});
 	};
 
 	function handleSubmit(event) {
 		event.preventDefault();
+    setSubmittedFromData(formData);
+    setFromData(formDataInitialState)
+
 		if (formState !== stateOptionsForForm[1]) {
 			console.log('form submitted', stateOptionsForForm[3]);
 			console.log(formData);
@@ -116,18 +97,21 @@ export default function Form() {
 	return (
 		<div className="small-container">
 			<Heading />
-			<form name="contactInformation" onSubmit={handleSubmit}>
+			<form
+				name="contactInformation"
+				onSubmit={e => {
+					handleSubmit(e);
+				}}
+			>
 				<Email
 					email={email}
-					onEmailChange={onEmailChange}
-					onMarketingCheckBoxChange={onMarketingCheckBoxChange}
 					marketingCheckBox={marketingCheckBox}
+					setFormOnChangeValue={setFormOnChangeValue}
 				/>
 				<Name
 					firstName={firstName}
 					lastName={lastName}
-					onFirstNameChange={onFirstNameChange}
-					onLastNameChange={onLastNameChange}
+					setFormOnChangeValue={setFormOnChangeValue}
 				/>
 				{/* <Toggle>
 					{({ on, toggle }) => (
@@ -151,14 +135,11 @@ export default function Form() {
 								address2={address2}
 								postalCode={postalCode}
 								country={country}
-								onAddress1Change={onAddress1Change}
-								onAddress2Change={onAddress2Change}
-								onPostalCodeChange={onPostalCodeChange}
-								onCountryChange={onCountryChange}
+								setFormOnChangeValue={setFormOnChangeValue}
 							/>
 							<Phone
 								phoneNumber={phoneNumber}
-								onPhoneNumberChange={onPhoneNumberChange}
+								setFormOnChangeValue={setFormOnChangeValue}
 							/>
 							{formState === stateOptionsForForm[3] ? (
 								<button disabled className="muted-button" type="submit">
@@ -172,7 +153,10 @@ export default function Form() {
 				</>
 			</form>
 			{formState === stateOptionsForForm[3] && (
-				<DataTable formData={formData} clearFormHandle={clearFormHandle} />
+				<DataTable
+					submittedFromData={submittedFromData}
+					clearFormHandle={clearFormHandle}
+				/>
 			)}
 		</div>
 	);

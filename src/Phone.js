@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function Phone({ phoneNumber, onPhoneNumberChange }) {
-  function handleChange(event) {
-    onPhoneNumberChange(event.target.value);
-  }
+export default function Phone({ phoneNumber, setFormOnChangeValue }) {
+
+  const handleChange = event => {
+		setFormOnChangeValue(event.target.name, event.target.value);
+  };
+  
   return (
     <>
       <label
@@ -14,13 +16,18 @@ export default function Phone({ phoneNumber, onPhoneNumberChange }) {
         }
         htmlFor="phone"
       >
-        ☎️Phone Number
+       <span role="img" aria-label="phone">☎️  </span> Phone Number
       </label>
       <input
         type="tel"
         id="phone"
+        name='phoneNumber'
+        // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         placeholder="Phone Number"
-        onChange={handleChange}
+        onChange={e => {
+          e.preventDefault();
+          handleChange(e)
+        }}
         value={phoneNumber}
       ></input>
     </>

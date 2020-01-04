@@ -2,7 +2,7 @@ import React from 'react';
 import ClearFormButton from './ClearFormButton';
 import { useSpring, animated } from 'react-spring';
 
-export default function DataTable({ formData, clearFormHandle }) {
+export default function DataTable({ submittedFromData, clearFormHandle }) {
 	const tableFade = useSpring({
 		from: { opacity: 0 },
 		to: { opacity: 1 },
@@ -10,13 +10,13 @@ export default function DataTable({ formData, clearFormHandle }) {
 		to: { transform: 'translateY(0%)' }
 	});
 
-	function rows(formData) {
-		let keys = Object.keys(formData);
+	 function rows(submittedFromData) {
+	let keys = Object.keys(submittedFromData);
 		return keys.map((element, index) => {
 			return (
 				<tr key={index}>
 					<td>{element}:</td>
-					<td>{formData[element].toString()}</td>
+					<td>{submittedFromData[element].toString()}</td>
 				</tr>
 			);
 		});
@@ -30,7 +30,7 @@ export default function DataTable({ formData, clearFormHandle }) {
 						<th>User Submitted Information</th>
 					</tr>
 				</thead>
-				<tbody>{rows(formData)}</tbody>
+				<tbody>{rows(submittedFromData)}</tbody>
 			</table>
 			<ClearFormButton clearFormHandle={clearFormHandle} />
 		</animated.div>
