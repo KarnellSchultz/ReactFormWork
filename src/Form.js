@@ -125,7 +125,6 @@ export default function Form() {
 						</>
 					)}
 				</Toggle> */}
-
 				<>
 					{formState === stateOptionsForForm[2] ||
 					formState === stateOptionsForForm[3] ? (
