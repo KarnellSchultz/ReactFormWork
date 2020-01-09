@@ -3,16 +3,13 @@ import { useSpring, animated } from 'react-spring';
 
 export default function Name({ firstName, lastName, setFormOnChangeValue }) {
 	const FirstNameFade = useSpring({
-		from: { opacity: 0 },
-		to: { opacity: 1 },
-		from: { transform: 'translateX(-100%)' },
-		to: { transform: 'translateX(0%)' }
+		from: { opacity: 0, transform: 'translateX(-100%)' },
+		to: { opacity: 1, transform: 'translateX(0%)' },
 	});
 	const LastNameFade = useSpring({
-		from: { opacity: 0 },
-		to: { opacity: 1 },
-		from: { transform: 'translateX(100%)' },
-		to: { transform: 'translateX(0%)' }
+		from: { opacity: 0, transform: 'translateX(100%)' },
+		to: { opacity: 1, transform: 'translateX(0%)' },
+
 	});
 
 	const handleChange = event => {

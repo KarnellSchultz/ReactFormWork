@@ -86,7 +86,7 @@ export default function Form() {
 		} else {
 			setIsToggle(false);
 		}
-	}, [formData, formState]);
+	}, [formData, formState, email, firstName, lastName, stateOptionsForForm]);
 
 	const [isToggled, setIsToggle] = useState(false);
 	const fade = useSpring({

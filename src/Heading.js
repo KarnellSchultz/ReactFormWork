@@ -3,10 +3,8 @@ import { useSpring, animated } from 'react-spring';
 
 export default function Heading() {
 	const HeadingFadeIn = useSpring({
-		from: { opacity: .80 },
-		to: { opacity: 1 },
-		from: { transform: 'translateY(-90%)' },
-		to: { transform: 'translateY(0%)' }
+		from: { opacity: .80, transform: 'translateY(-90%)' },
+		to: { opacity: 1, transform: 'translateY(0%)' }
 	});
 
 	return (

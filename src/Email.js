@@ -13,6 +13,7 @@ export default function Email({
 		}
 	}
 	function ValidateEmail(emailInput) {
+		// eslint-disable-next-line no-useless-escape
 		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput)) {
 			setErrors({}); //setting error object to empty
 			return true;

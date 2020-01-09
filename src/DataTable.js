@@ -4,10 +4,8 @@ import { useSpring, animated } from 'react-spring';
 
 export default function DataTable({ submittedFromData, clearFormHandle }) {
 	const tableFade = useSpring({
-		from: { opacity: 0 },
-		to: { opacity: 1 },
-		from: { transform: 'translateY(20%)' },
-		to: { transform: 'translateY(0%)' }
+		from: { opacity: 0 , transform: 'translateY(20%)' },
+		to: { opacity: 1, transform: 'translateY(0%)' }
 	});
 
 	 function rows(submittedFromData) {
