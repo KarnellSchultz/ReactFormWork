@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 
+type Props = {
+	email: string;
+	marketingCheckBox: boolean;
+	setFormOnChangeValue: any;
+};
+
 export default function Email({
 	email,
 	marketingCheckBox,
 	setFormOnChangeValue
-}) {
+}: Props) {
 	const [errors, setErrors] = useState({});
 
-	function handleBlur(event) {
-		if (ValidateEmail(event.target.value) === false) {
+	function handleBlur(event: React.FormEvent<HTMLFormElement>) {
+		if (ValidateEmail(event.currentTarget.value) === false) {
 			console.log('errors');
 		}
 	}
-	function ValidateEmail(emailInput) {
+	function ValidateEmail(emailInput: string) {
 		// eslint-disable-next-line no-useless-escape
 		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput)) {
 			setErrors({}); //setting error object to empty
@@ -23,12 +29,17 @@ export default function Email({
 		}
 	}
 
-	const handleChange = event => {
-		setFormOnChangeValue(event.target.name, event.target.value);
-  };
-  const handleCheckboxChange = event => {
-    setFormOnChangeValue(event.target.name, !marketingCheckBox)
-  }
+	const handleChange = (event: React.FormEvent<HTMLInputElement>): any => {
+		return setFormOnChangeValue(
+			event.currentTarget.name,
+			event.currentTarget.value
+		);
+	};
+	const handleCheckboxChange = (
+		event: React.FormEvent<HTMLInputElement>
+	): any => {
+		return setFormOnChangeValue(event.currentTarget.name, !marketingCheckBox);
+	};
 
 	return (
 		<>
@@ -40,7 +51,10 @@ export default function Email({
 				}
 				htmlFor="emailAddress"
 			>
-				<span role="img" aria-label="emailemoji">📧 </span>E-mail
+				<span role="img" aria-label="emailemoji">
+					📧{' '}
+				</span>
+				E-mail
 			</label>
 			<input
 				type="email"
@@ -49,22 +63,20 @@ export default function Email({
 				id="emailAddress"
 				aria-describedby="emailHelpId"
 				placeholder="E-mail"
-				onChange={e => {
+				onChange={(e: React.FormEvent<HTMLInputElement>) => {
 					e.preventDefault();
 					handleChange(e);
 				}}
-				onBlur={handleBlur}
+				onBlur={(e: React.FormEvent) => handleBlur}
 				value={email}
 			></input>
 			<small id="emailHelpId " className="form-text text-muted">
 				<label>
 					<input
 						name="marketingCheckBox"
-						value={marketingCheckBox}
-            onClick={e => {
-              handleCheckboxChange(e)
-            }} 
 						type="checkbox"
+						value={marketingCheckBox.toString()}
+						onClick={(e: React.FormEvent<HTMLInputElement>) => handleCheckboxChange}
 					></input>
 					&nbsp; Keep me up to date with marketing stuff
 				</label>

@@ -1,9 +1,14 @@
 import React from "react";
 
-export default function Phone({ phoneNumber, setFormOnChangeValue }) {
+type Props = {
+  phoneNumber: string;
+  setFormOnChangeValue: (name: string, value: string) => void
+}
 
-  const handleChange = event => {
-		setFormOnChangeValue(event.target.name, event.target.value);
+export default function Phone({ phoneNumber, setFormOnChangeValue }: Props) {
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+		return setFormOnChangeValue(event.currentTarget.name, event.currentTarget.value);
   };
   
   return (

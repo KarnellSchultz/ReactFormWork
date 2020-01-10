@@ -1,21 +1,31 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 
-export default function Name({ firstName, lastName, setFormOnChangeValue }) {
+type Props = {
+	firstName: string;
+	lastName: string;
+	setFormOnChangeValue: (name: string, value: string) => void;
+};
+
+export default function Name({
+	firstName,
+	lastName,
+	setFormOnChangeValue
+}: Props) {
+
 	const FirstNameFade = useSpring({
 		from: { opacity: 0, transform: 'translateX(-100%)' },
 		to: { opacity: 1, transform: 'translateX(0%)' },
-		config: {duration: 500},
+		config: { duration: 500 }
 	});
 	const LastNameFade = useSpring({
 		from: { opacity: 0, transform: 'translateX(100%)' },
 		to: { opacity: 1, transform: 'translateX(0%)' },
-		config: {duration: 500},
-
+		config: { duration: 500 }
 	});
 
-	const handleChange = event => {
-		setFormOnChangeValue(event.target.name, event.target.value);
+	const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+		setFormOnChangeValue(event.currentTarget.name, event.currentTarget.value);
 	};
 
 	return (
@@ -42,7 +52,7 @@ export default function Name({ firstName, lastName, setFormOnChangeValue }) {
 						id="firstName"
 						name="firstName"
 						placeholder="First Name"
-						onChange={e => {
+						onChange={(e: React.FormEvent<HTMLInputElement>) => {
 							e.preventDefault();
 							handleChange(e);
 						}}
@@ -65,7 +75,7 @@ export default function Name({ firstName, lastName, setFormOnChangeValue }) {
 						id="lastName"
 						name="lastName"
 						placeholder="Last Name"
-						onChange={e => {
+						onChange={(e: React.FormEvent<HTMLInputElement>) => {
 							e.preventDefault();
 							handleChange(e);
 						}}

@@ -49,7 +49,7 @@ export default function Form() {
 		setFromData({ ...formData, [value]: setValue });
 	}
 
-	const clearFormHandle = (event: any) => {
+	const clearFormHandle = (event: React.FormEvent): void => {
 		event.preventDefault();
 		setIsToggle(false);
 		setFromData(formDataInitialState);

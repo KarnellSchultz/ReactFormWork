@@ -2,14 +2,28 @@ import React from 'react';
 import ClearFormButton from './ClearFormButton';
 import { useSpring, animated } from 'react-spring';
 
-export default function DataTable({ submittedFromData, clearFormHandle }) {
+type Props = {
+	submittedFromData: {} | {
+		email: string
+		marketingCheckBox:string;
+		firstName:string;
+		lastName:string;
+		address1:string;
+		address2:string;
+		country: string;
+		postalCode: string;
+		phoneNumber: string 	};
+	clearFormHandle: (event: React.FormEvent<HTMLButtonElement>) => void;
+}
+
+export default function DataTable({ submittedFromData, clearFormHandle }: Props ) {
 	const tableFade = useSpring({
 		from: { opacity: 0 , transform: 'translateY(20%)' },
 		to: { opacity: 1, transform: 'translateY(0%)' },
 	config: {duration: 500}
 	});
 
-	 function rows(submittedFromData) {
+	 function rows(submittedFromData: any) {
 	let keys = Object.keys(submittedFromData);
 		return keys.map((element, index) => {
 			return (
@@ -27,6 +41,7 @@ export default function DataTable({ submittedFromData, clearFormHandle }) {
 				<thead>
 					<tr>
 						<th>User Submitted Information</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>{rows(submittedFromData)}</tbody>
@@ -35,3 +50,4 @@ export default function DataTable({ submittedFromData, clearFormHandle }) {
 		</animated.div>
 	);
 }
+

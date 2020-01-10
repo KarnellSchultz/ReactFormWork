@@ -1,7 +1,11 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 
-export default function ClearFormButton({ clearFormHandle }) {
+type Props = {
+	clearFormHandle: (event: React.FormEvent<HTMLButtonElement>) => void;
+}
+
+export default function ClearFormButton({ clearFormHandle }: Props) {
 	const buttonBump = useSpring({
 		from: { transform: 'translateX(-80%)' },
 		to: { transform: 'translateX(0%)' }
