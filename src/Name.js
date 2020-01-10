@@ -5,10 +5,12 @@ export default function Name({ firstName, lastName, setFormOnChangeValue }) {
 	const FirstNameFade = useSpring({
 		from: { opacity: 0, transform: 'translateX(-100%)' },
 		to: { opacity: 1, transform: 'translateX(0%)' },
+		config: {duration: 500},
 	});
 	const LastNameFade = useSpring({
 		from: { opacity: 0, transform: 'translateX(100%)' },
 		to: { opacity: 1, transform: 'translateX(0%)' },
+		config: {duration: 500},
 
 	});
 

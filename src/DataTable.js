@@ -5,7 +5,8 @@ import { useSpring, animated } from 'react-spring';
 export default function DataTable({ submittedFromData, clearFormHandle }) {
 	const tableFade = useSpring({
 		from: { opacity: 0 , transform: 'translateY(20%)' },
-		to: { opacity: 1, transform: 'translateY(0%)' }
+		to: { opacity: 1, transform: 'translateY(0%)' },
+	config: {duration: 500}
 	});
 
 	 function rows(submittedFromData) {

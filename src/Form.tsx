@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useSpring, animated } from 'react-spring';
 
 import Name from './Name';
@@ -45,11 +45,11 @@ export default function Form() {
 
 	const [submittedFromData, setSubmittedFromData] = useState({});
 
-	function setFormOnChangeValue(value, setValue) {
+	function setFormOnChangeValue(value: any, setValue: any) {
 		setFromData({ ...formData, [value]: setValue });
 	}
 
-	const clearFormHandle = event => {
+	const clearFormHandle = (event: any) => {
 		event.preventDefault();
 		setIsToggle(false);
 		setFromData(formDataInitialState);
@@ -57,7 +57,7 @@ export default function Form() {
 		setSubmittedFromData({});
 	};
 
-	function handleSubmit(event) {
+	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
     setSubmittedFromData(formData);
     setFromData(formDataInitialState)
@@ -91,7 +91,8 @@ export default function Form() {
 	const [isToggled, setIsToggle] = useState(false);
 	const fade = useSpring({
 		opacity: isToggled ? 1 : 0,
-		transform: isToggled ? 'translateY(0%)' : 'translateY(20%)'
+		transform: isToggled ? 'translateY(0%)' : 'translateY(30%)',
+		config: {duration: 300},
 	});
 
 	return (
@@ -99,7 +100,7 @@ export default function Form() {
 			<Heading />
 			<form
 				name="contactInformation"
-				onSubmit={e => {
+				onSubmit={(e: FormEvent<HTMLFormElement>) => {
 					handleSubmit(e);
 				}}
 			>
