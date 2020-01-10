@@ -12,7 +12,6 @@ export default function Name({
 	lastName,
 	setFormOnChangeValue
 }: Props) {
-
 	const FirstNameFade = useSpring({
 		from: { opacity: 0, transform: 'translateX(-100%)' },
 		to: { opacity: 1, transform: 'translateX(0%)' },
@@ -24,6 +23,17 @@ export default function Name({
 		config: { duration: 500 }
 	});
 
+	const labelTextFadeFirstName = useSpring({
+		opacity: firstName.length > 1 ? 1 : 0,
+		transform: firstName.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
+	const labelTextFadeLastName = useSpring({
+		opacity: lastName.length > 1 ? 1 : 0,
+		transform: lastName.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
+
 	const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
 		setFormOnChangeValue(event.currentTarget.name, event.currentTarget.value);
 	};
@@ -32,20 +42,12 @@ export default function Name({
 		<div>
 			<div className="flex-row">
 				<animated.div style={FirstNameFade} className="flex-small">
-					<label
-						className={
-							firstName.length > 1
-								? 'transition-label transition-label-active '
-								: 'transition-label'
-						}
-						htmlFor="firstName"
-					>
+					<animated.label style={labelTextFadeFirstName} htmlFor="firstName">
 						<span role="img" aria-label="smileface">
-							{' '}
 							😄
-						</span>{' '}
+						</span>
 						First Name
-					</label>
+					</animated.label>
 
 					<input
 						type="text"
@@ -60,16 +62,9 @@ export default function Name({
 					/>
 				</animated.div>
 				<animated.div style={LastNameFade} className="flex-small">
-					<label
-						className={
-							lastName.length > 1
-								? 'transition-label transition-label-active'
-								: 'transition-label'
-						}
-						htmlFor="name"
-					>
+					<animated.label style={labelTextFadeLastName} htmlFor="name">
 						Last Name
-					</label>
+					</animated.label>
 					<input
 						type="text"
 						id="lastName"

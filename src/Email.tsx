@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
 
 type Props = {
 	email: string;
@@ -41,21 +42,20 @@ export default function Email({
 		return setFormOnChangeValue(event.currentTarget.name, !marketingCheckBox);
 	};
 
+	const labelTextFade = useSpring({
+		opacity: email.length > 1 ? 1 : 0 ,
+		transform: email.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
+
 	return (
 		<>
-			<label
-				className={
-					email.length >= 1
-						? 'transition-label  transition-label-active'
-						: 'transition-label'
-				}
-				htmlFor="emailAddress"
-			>
+			<animated.label style={labelTextFade} htmlFor="emailAddress">
 				<span role="img" aria-label="emailemoji">
 					📧{' '}
 				</span>
 				E-mail
-			</label>
+			</animated.label>
 			<input
 				type="email"
 				className={Object.keys(errors).length > 0 ? 'has-error ' : 'is-success'}
@@ -76,7 +76,9 @@ export default function Email({
 						name="marketingCheckBox"
 						type="checkbox"
 						value={marketingCheckBox.toString()}
-						onClick={(e: React.FormEvent<HTMLInputElement>) => handleCheckboxChange}
+						onClick={(e: React.FormEvent<HTMLInputElement>) =>
+							handleCheckboxChange
+						}
 					></input>
 					&nbsp; Keep me up to date with marketing stuff
 				</label>

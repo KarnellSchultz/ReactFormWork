@@ -6,9 +6,8 @@ import Email from './Email';
 import Address from './Address';
 import Phone from './Phone';
 import DataTable from './DataTable';
-// import Toggle from './Toggle';
-// import Modal from './Modal';
 import Heading from './Heading';
+// import Modal from './Modal';
 
 export default function Form() {
 	const formDataInitialState = {
@@ -57,10 +56,10 @@ export default function Form() {
 		setSubmittedFromData({});
 	};
 
-	function handleSubmit(event: FormEvent<HTMLFormElement>) {
+	function handleSubmit(event: FormEvent<HTMLFormElement>): void {
 		event.preventDefault();
-    setSubmittedFromData(formData);
-    setFromData(formDataInitialState)
+		setSubmittedFromData(formData);
+		setFromData(formDataInitialState);
 
 		if (formState !== stateOptionsForForm[1]) {
 			console.log('form submitted', stateOptionsForForm[3]);
@@ -70,6 +69,7 @@ export default function Form() {
 	}
 
 	useEffect(() => {
+		console.log('render');
 		if (
 			email &&
 			firstName &&
@@ -92,7 +92,7 @@ export default function Form() {
 	const fade = useSpring({
 		opacity: isToggled ? 1 : 0,
 		transform: isToggled ? 'translateY(0%)' : 'translateY(30%)',
-		config: {duration: 300},
+		config: { duration: 300 }
 	});
 
 	return (
@@ -147,7 +147,7 @@ export default function Form() {
 								</button>
 							) : (
 								<button type="submit">Submit Form</button>
-							)}
+							)}{' '}
 						</animated.div>
 					) : null}
 				</>
