@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
+import Emoji from './Util/Emoji';
 
 type Props = {
 	firstName: string;
@@ -43,12 +44,9 @@ export default function Name({
 			<div className="flex-row">
 				<animated.div style={FirstNameFade} className="flex-small">
 					<animated.label style={labelTextFadeFirstName} htmlFor="firstName">
-						<span role="img" aria-label="smileface">
-							😄
-						</span>
+						<Emoji label={'smileface'} symbol={'😄'}  />
 						First Name
 					</animated.label>
-
 					<input
 						type="text"
 						id="firstName"
@@ -63,6 +61,7 @@ export default function Name({
 				</animated.div>
 				<animated.div style={LastNameFade} className="flex-small">
 					<animated.label style={labelTextFadeLastName} htmlFor="name">
+						<Emoji label={'whoknows'} symbol={'👷🏽‍♀️'} />
 						Last Name
 					</animated.label>
 					<input

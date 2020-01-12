@@ -7,6 +7,7 @@ import Address from './Address';
 import Phone from './Phone';
 import DataTable from './DataTable';
 import Heading from './Heading';
+
 // import Modal from './Modal';
 
 export default function Form() {
@@ -98,23 +99,24 @@ export default function Form() {
 	return (
 		<div className="small-container">
 			<Heading />
-			<form
-				name="contactInformation"
-				onSubmit={(e: FormEvent<HTMLFormElement>) => {
-					handleSubmit(e);
-				}}
-			>
-				<Email
-					email={email}
-					marketingCheckBox={marketingCheckBox}
-					setFormOnChangeValue={setFormOnChangeValue}
-				/>
-				<Name
-					firstName={firstName}
-					lastName={lastName}
-					setFormOnChangeValue={setFormOnChangeValue}
-				/>
-				{/* <Toggle>
+			{formState !== stateOptionsForForm[3] && (
+				<form
+					name="contactInformation"
+					onSubmit={(e: FormEvent<HTMLFormElement>) => {
+						handleSubmit(e);
+					}}
+				>
+					<Email
+						email={email}
+						marketingCheckBox={marketingCheckBox}
+						setFormOnChangeValue={setFormOnChangeValue}
+					/>
+					<Name
+						firstName={firstName}
+						lastName={lastName}
+						setFormOnChangeValue={setFormOnChangeValue}
+					/>
+					{/* <Toggle>
 					{({ on, toggle }) => (
 						<>
 							<button onClick={toggle}>CLICK ME</button>
@@ -126,32 +128,26 @@ export default function Form() {
 						</>
 					)}
 				</Toggle> */}
-				<>
-					{formState === stateOptionsForForm[2] ||
-					formState === stateOptionsForForm[3] ? (
-						<animated.div style={fade}>
-							<Address
-								address1={address1}
-								address2={address2}
-								postalCode={postalCode}
-								country={country}
-								setFormOnChangeValue={setFormOnChangeValue}
-							/>
-							<Phone
-								phoneNumber={phoneNumber}
-								setFormOnChangeValue={setFormOnChangeValue}
-							/>
-							{formState === stateOptionsForForm[3] ? (
-								<button disabled className="muted-button" type="submit">
-									Form Submitted
-								</button>
-							) : (
+					<>
+						{formState === stateOptionsForForm[2] && (
+							<animated.div style={fade}>
+								<Address
+									address1={address1}
+									address2={address2}
+									postalCode={postalCode}
+									country={country}
+									setFormOnChangeValue={setFormOnChangeValue}
+								/>
+								<Phone
+									phoneNumber={phoneNumber}
+									setFormOnChangeValue={setFormOnChangeValue}
+								/>
 								<button type="submit">Submit Form</button>
-							)}{' '}
-						</animated.div>
-					) : null}
-				</>
-			</form>
+							</animated.div>
+						)}
+					</>
+				</form>
+			)}
 			{formState === stateOptionsForForm[3] && (
 				<DataTable
 					submittedFromData={submittedFromData}

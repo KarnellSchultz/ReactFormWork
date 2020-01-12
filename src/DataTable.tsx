@@ -18,9 +18,9 @@ type Props = {
 
 export default function DataTable({ submittedFromData, clearFormHandle }: Props ) {
 	const tableFade = useSpring({
-		from: { opacity: 0 , transform: 'translateY(20%)' },
+		from: { opacity: 0 , transform: 'translateY(50%)' },
 		to: { opacity: 1, transform: 'translateY(0%)' },
-	config: {duration: 500}
+	config: {duration: 680}
 	});
 
 	 function rows(submittedFromData: any) {

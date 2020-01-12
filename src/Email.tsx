@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
+import Emoji from './Util/Emoji'
 
 type Props = {
 	email: string;
@@ -12,6 +13,7 @@ export default function Email({
 	marketingCheckBox,
 	setFormOnChangeValue
 }: Props) {
+
 	const [errors, setErrors] = useState({});
 
 	function handleBlur(event: React.FormEvent<HTMLFormElement>) {
@@ -43,17 +45,16 @@ export default function Email({
 	};
 
 	const labelTextFade = useSpring({
-		opacity: email.length > 1 ? 1 : 0 ,
+		opacity: email.length > 1 ? 1 : 0,
 		transform: email.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
 		config: { duration: 200 }
 	});
 
+
 	return (
 		<>
 			<animated.label style={labelTextFade} htmlFor="emailAddress">
-				<span role="img" aria-label="emailemoji">
-					📧{' '}
-				</span>
+				<Emoji label={'email' } symbol={'✉️'}  /> 
 				E-mail
 			</animated.label>
 			<input

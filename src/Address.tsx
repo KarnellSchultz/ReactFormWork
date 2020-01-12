@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
+import Emoji from './Util/Emoji';
 
 type Props = {
 	address1: string;
@@ -15,34 +17,41 @@ export default function Address({
 	country,
 	setFormOnChangeValue
 }: Props) {
-	const handleChange = (event: React.FormEvent<HTMLInputElement> |  React.FormEvent<HTMLSelectElement>) => {
+	const handleChange = (
+		event:
+			| React.FormEvent<HTMLInputElement>
+			| React.FormEvent<HTMLSelectElement>
+	) => {
 		setFormOnChangeValue(event.currentTarget.name, event.currentTarget.value);
 	};
+
+	const address1Fade = useSpring({
+		opacity: address1.length > 1 ? 1 : 0,
+		transform: address1.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
+	const address2Fade = useSpring({
+		opacity: address1.length > 1 ? 1 : 0,
+		transform: address1.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
+
+	const postalCodeFade = useSpring({
+		opacity: postalCode.length > 1 ? 1 : 0,
+		transform: postalCode.length > 1 ? 'translate(3%)' : 'translateX(-7%)',
+		config: { duration: 200 }
+	});
 
 	return (
 		<>
 			<h3>
-				{' '}
-				<span role="img" aria-label="shippingbox">
-					{' '}
-					📦
-				</span>
+			<Emoji label={'house'} symbol={'📦'} />
 				Shipping Address
 			</h3>
-			<label
-				className={
-					address1.length > 1
-						? 'transition-label  transition-label-active'
-						: 'transition-label'
-				}
-				htmlFor="address1"
-			>
-				<span role="img" aria-label="home">
-					{' '}
-					🏠{' '}
-				</span>{' '}
+			<animated.label style={address1Fade} htmlFor="address1">
+				<Emoji label={'house'} symbol={'🏠'} />
 				Address
-			</label>
+			</animated.label>
 			<input
 				required
 				type="text"
@@ -55,14 +64,7 @@ export default function Address({
 					handleChange(e);
 				}}
 			></input>
-			<label
-				className={
-					address2.length > 1
-						? 'transition-label  transition-label-active'
-						: 'transition-label'
-				}
-				htmlFor="address2"
-			></label>
+			<animated.label style={address2Fade} htmlFor="address2"></animated.label>
 			<input
 				type="text"
 				id="address2"
@@ -77,18 +79,8 @@ export default function Address({
 
 			<div className="flex-row">
 				<div className="flex-small">
-					<label
-						className={
-							country.length > 1
-								? 'transition-label  transition-label-active'
-								: 'transition-label'
-						}
-						htmlFor="country"
-					>
-						<span role="img" aria-label="earth map">
-							{' '}
-							🗺
-						</span>{' '}
+					<label htmlFor="country">
+						<Emoji label={'house'} symbol={'🗺'} />
 						Country
 					</label>
 					<select
@@ -107,19 +99,10 @@ export default function Address({
 					</select>
 				</div>
 				<div className="flex-small">
-					<label
-						className={
-							postalCode.length > 1
-								? 'transition-label  transition-label-active'
-								: 'transition-label'
-						}
-						htmlFor="postalCode"
-					>
-						<span role="img" aria-label="mailbox">
-							📬{' '}
-						</span>{' '}
+					<animated.label style={postalCodeFade} htmlFor="postalCode">
+						<Emoji label={'house'} symbol={'📬'} />
 						Postal Code
-					</label>
+					</animated.label>
 					<input
 						type="text"
 						id="postalCode"
