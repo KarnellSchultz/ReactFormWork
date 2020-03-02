@@ -14,7 +14,7 @@ Custom React forms, possibly to be used with a store. The form includes contact 
 
 - React
 - React-Spring Amimations
-- (Primitive)[https://taniarascia.github.io/primitive/] UI for the CSS 
+- [Primitive](https://taniarascia.github.io/primitive/) UI for the CSS 
 
 ## Available Scripts
 
